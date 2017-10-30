@@ -1,0 +1,36 @@
+Our command starts in the user space where it get's run by
+a user level program.
+
+This brings us to user.h where free is defined as a system call
+
+void free(void*);
+
+umalloc.c inherits that function declaration and defines
+the free function like so
+
+void
+free(void *ap)
+{
+  Header *bp, *p;
+
+  bp = (Header*)ap - 1;
+  for(p = freep; !(bp > p && bp < p->s.ptr); p = p->s.ptr)
+    if(p >= p->s.ptr && (bp > p || bp < p->s.ptr))
+      break;
+  if(bp + bp->s.size == p->s.ptr){
+    bp->s.size += p->s.ptr->s.size;
+    bp->s.ptr = p->s.ptr->s.ptr;
+  } else
+    bp->s.ptr = p->s.ptr;
+  if(p + p->s.size == bp){
+    p->s.size += bp->s.size;
+    p->s.ptr = bp->s.ptr;
+  } else
+    p->s.ptr = bp;
+  freep = p;
+}
+
+This function, if given a pointer to a block of memory would
+free the memory and return having completed it's job.
+In the case where it is given an invalid pointer, an exception
+will be thrown which will take us back to the user space.
