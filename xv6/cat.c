@@ -1,7 +1,8 @@
 #include "types.h"
 #include "stat.h"
 #include "user.h"
-
+#include "memlayout.h"
+/*
 char buf[512];
 
 void
@@ -20,10 +21,14 @@ cat(int fd)
     exit();
   }
 }
-
+*/
 int
 main(int argc, char *argv[])
 {
+	//int addr = argc;
+	//printf(1, "%n\n", addr);
+	return argc;
+/*
   int fd, i;
 
   if(argc <= 1){
@@ -39,5 +44,7 @@ main(int argc, char *argv[])
     cat(fd);
     close(fd);
   }
+  exit();
+*/
   exit();
 }

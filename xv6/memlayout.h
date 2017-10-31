@@ -9,6 +9,7 @@
 #define KERNLINK (KERNBASE+EXTMEM)  // Address where kernel is linked
 
 #define V2P(a) (((uint) (a)) - KERNBASE)
+#define u_v2p(a) (((uint (a)) - KERNBASE)//does literally the same thing as V2P (Which seems to be what we want)
 #define P2V(a) (((void *) (a)) + KERNBASE)
 
 #define V2P_WO(x) ((x) - KERNBASE)    // same as V2P, but without casts
