@@ -110,10 +110,10 @@ sys_u_v2p(char *a)
   }
   v = val;
 	int p = V2P(v);//converts
-	if (p >= PHYSTOP) {//end of physical memory
-		cprintf("invalid address");
-		return -1;//error
+	if (v >= (KERNBASE+PHYSTOP) || v < KERNBASE) {//end of physical memory
+		cprintf("invalid ");
+		return p;//error
 	}
-	p = (uint) (p);
+	//p = (uint) (p);
 	return p;//returns physical address
 }
