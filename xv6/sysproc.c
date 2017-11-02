@@ -89,3 +89,19 @@ sys_uptime(void)
   release(&tickslock);
   return xticks;
 }
+
+//HOMEWORK 3 IMPLEMENTATION
+//Takes input using argint, uses v2p to convert to physical, and then returns the physical address
+int
+sys_u_v2p(int a)
+{
+	int v;
+	argint(0, &v);//gets syscall arg
+	int p = V2P(v);//converts
+	if (p >= PHYSTOP) {//end of physical memory
+		cprintf("invalid address");
+		return -1;//error
+	}
+	p = (uint) (p);
+	return p;//returns physical address
+}

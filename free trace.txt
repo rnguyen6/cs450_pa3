@@ -1,7 +1,11 @@
 Our command starts in the user space where it get's run by
 a user level program.
 
-This brings us to defs.h where free is defined as a system call
+This brings us to user.h where free is defined as a system call
+
+void free(void*);
+
+which brings us to defs.h which has
 
 void            freevm(pde_t*);
 

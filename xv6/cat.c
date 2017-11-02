@@ -1,50 +1,15 @@
+//TEST FILE FOR HOMEWORK 3 u_v2p
+// I am using
+//this cat.c which already compiles. Sorry for the confusing
+//name but this is where the test for u_v2p is
 #include "types.h"
 #include "stat.h"
 #include "user.h"
-#include "memlayout.h"
-/*
-char buf[512];
 
-void
-cat(int fd)
-{
-  int n;
-
-  while((n = read(fd, buf, sizeof(buf))) > 0) {
-    if (write(1, buf, n) != n) {
-      printf(1, "cat: write error\n");
-      exit();
-    }
-  }
-  if(n < 0){
-    printf(1, "cat: read error\n");
-    exit();
-  }
-}
-*/
 int
 main(int argc, char *argv[])
 {
-	//int addr = argc;
-	//printf(1, "%n\n", addr);
-	return argc;
-/*
-  int fd, i;
-
-  if(argc <= 1){
-    cat(0);
-    exit();
-  }
-
-  for(i = 1; i < argc; i++){
-    if((fd = open(argv[i], 0)) < 0){
-      printf(1, "cat: cannot open %s\n", argv[i]);
-      exit();
-    }
-    cat(fd);
-    close(fd);
-  }
-  exit();
-*/
-  exit();
+  int p = atoi(argv[1]);
+  printf(1, " physical address: %d\n", u_v2p(p));
+  return 1;
 }
