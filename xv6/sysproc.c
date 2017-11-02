@@ -6,6 +6,7 @@
 #include "memlayout.h"
 #include "mmu.h"
 #include "proc.h"
+#include "stdint.h"
 
 int
 sys_fork(void)
@@ -93,10 +94,21 @@ sys_uptime(void)
 //HOMEWORK 3 IMPLEMENTATION
 //Takes input using argint, uses v2p to convert to physical, and then returns the physical address
 int
-sys_u_v2p(int a)
+sys_u_v2p(char *a)
 {
 	int v;
-	argint(0, &v);//gets syscall arg
+	//argint(0, &v);//gets syscall arg
+  char *hex;
+  argstr(0,&hex);
+  uint32_t val = 0;
+  while(*hex){
+    uint8_t byte = *hex++;
+    if(byte >= '0'&& byte <= '9') byte = byte - '0';
+    else if (byte >= 'a' && byte <= 'f') byte = byte - 'a' + 10;
+    else if (byte >= 'A' && byte <= 'F') byte = byte - 'A' + 10;
+    val = (val << 4) | (byte & 0xF);
+  }
+  v = val;
 	int p = V2P(v);//converts
 	if (p >= PHYSTOP) {//end of physical memory
 		cprintf("invalid address");
