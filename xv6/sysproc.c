@@ -110,7 +110,7 @@ sys_u_v2p(char *a)
   }
   v = val;
 	int p = V2P(v);//converts
-	if (v >= (KERNBASE+PHYSTOP) || v < KERNBASE) {//end of physical memory
+	if (p >= (PHYSTOP) || p < 0) {//end of physical memory
 		cprintf("invalid ");
 		return p;//error
 	}
